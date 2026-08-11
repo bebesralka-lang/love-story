@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎡 Наш парк аттракционов ❤️</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>💕 Наша история любви</title>
     <style>
-        /* ===== ОБЩИЕ СТИЛИ ===== */
         * {
             margin: 0;
             padding: 0;
@@ -14,18 +13,18 @@
 
         body {
             min-height: 100vh;
-            background: linear-gradient(145deg, #0b0e1a 0%, #1a1040 40%, #2d1b69 100%);
-            font-family: 'Courier New', 'Segoe UI', cursive;
-            padding: 30px 20px;
+            background: linear-gradient(145deg, #0b0a1a 0%, #1a1040 40%, #2d1b69 100%);
+            font-family: 'Georgia', 'Segoe UI', cursive;
             display: flex;
             flex-direction: column;
             align-items: center;
+            padding: 30px 20px;
             overflow-x: hidden;
             position: relative;
         }
 
-        /* ===== ЗВЁЗДНЫЙ ФОН ===== */
-        .stars {
+        /* ===== ФОНАРИКИ ИЗ РАПУНЦЕЛЬ ===== */
+        .lanterns {
             position: fixed;
             top: 0;
             left: 0;
@@ -33,332 +32,458 @@
             height: 100%;
             pointer-events: none;
             z-index: 0;
+            overflow: hidden;
         }
-        .star {
+        .lantern {
             position: absolute;
-            width: 6px;
-            height: 6px;
-            background: #fffacd;
-            border-radius: 50%;
-            box-shadow: 0 0 12px #ffd966;
-            animation: twinkle 2s infinite alternate ease-in-out;
+            font-size: 30px;
+            animation: floatUp linear forwards;
+            user-select: none;
+            opacity: 0.7;
+            text-shadow: 0 0 30px rgba(255, 200, 50, 0.6);
         }
-        @keyframes twinkle {
-            0% { opacity: 0.2; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.4); }
-        }
-
-        /* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
-        .container {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.06);
-            backdrop-filter: blur(4px);
-            border-radius: 70px 70px 40px 40px;
-            padding: 35px 25px 50px;
-            border: 2px dashed rgba(255, 215, 0, 0.3);
-            box-shadow: 0 0 80px rgba(255, 200, 50, 0.2);
-            text-align: center;
+        @keyframes floatUp {
+            0% { transform: translateY(110vh) rotate(0deg) scale(0.8); opacity: 0.9; }
+            100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
         }
 
-        /* ===== ЗАГОЛОВОК-БИЛЕТ ===== */
-        .ticket {
-            background: linear-gradient(135deg, #fcee9f, #f5c542);
-            padding: 18px 30px;
-            border-radius: 60px;
-            display: inline-block;
-            margin-bottom: 20px;
-            box-shadow: 0 0 30px #f5b34288;
-            transform: rotate(-2deg);
-            font-weight: bold;
-            color: #1f0f3a;
-            font-size: 1.1rem;
-            letter-spacing: 2px;
-            border: 3px solid #fff3c9;
-        }
-        .ticket span {
-            font-size: 1.8rem;
-            display: block;
-            margin-top: 4px;
-            font-family: 'Georgia', serif;
-        }
-
-        h1 {
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: #ffe9a7;
-            text-shadow: 0 0 20px #ffb347, 0 0 60px #ff7b00;
-            margin: 10px 0 8px;
-            letter-spacing: 4px;
-            font-family: 'Trebuchet MS', cursive;
-        }
-        .sub {
-            color: #d9c8ff;
-            font-size: 1.3rem;
-            margin-bottom: 25px;
-            font-style: italic;
-            text-shadow: 0 0 10px #b37bff;
-        }
-
-        /* ===== МУЗЫКАЛЬНЫЙ ПЛЕЕР ===== */
-        .music-box {
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 50px;
-            padding: 14px 20px;
-            margin: 5px 0 25px;
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            backdrop-filter: blur(6px);
-            border: 1px solid #ffd966;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
-        .music-box button {
-            background: #f5c542;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 40px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            color: #1a0f2e;
-            transition: 0.2s;
-            box-shadow: 0 0 20px #f5b34288;
-            font-family: inherit;
-        }
-        .music-box button:hover {
-            transform: scale(1.06);
-            background: #ffd966;
-        }
-        .music-box .label {
-            color: #ffe9a7;
-            font-size: 0.9rem;
-        }
-
-        /* ===== ГАЛЕРЕЯ ПОЛЯРОИДОВ ===== */
-        .polaroid-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px 25px;
-            margin: 30px 0 25px;
-        }
-
-        .polaroid {
-            background: #fef9e6;
-            padding: 12px 12px 35px 12px;
-            border-radius: 18px 18px 30px 30px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7), 0 0 0 2px #fff9e6, 0 0 0 5px rgba(255, 215, 0, 0.2);
-            width: 190px;
-            transform: rotate(var(--rot, 0deg));
-            transition: 0.3s;
-            position: relative;
-            flex-shrink: 0;
-        }
-        .polaroid:hover {
-            transform: rotate(0deg) scale(1.05);
-            box-shadow: 0 20px 50px rgba(255, 215, 0, 0.5);
-            z-index: 10;
-        }
-        .polaroid img {
-            width: 100%;
-            aspect-ratio: 1 / 1;
-            object-fit: cover;
-            border-radius: 12px;
-            display: block;
-            filter: sepia(0.15) contrast(1.05);
-            border: 2px solid #e6dcc4;
-        }
-        .polaroid .caption {
-            font-family: 'Georgia', cursive;
-            font-size: 0.8rem;
-            color: #3d2a1a;
-            margin-top: 10px;
-            text-align: center;
-            letter-spacing: 1px;
-            opacity: 0.8;
-            font-style: italic;
-        }
-
-        /* разный наклон для каждого фото */
-        .polaroid:nth-child(1) { --rot: -6deg; margin-top: 10px; }
-        .polaroid:nth-child(2) { --rot: 8deg; margin-top: -15px; }
-        .polaroid:nth-child(3) { --rot: -11deg; margin-top: 20px; }
-        .polaroid:nth-child(4) { --rot: 5deg; margin-top: -5px; }
-        .polaroid:nth-child(5) { --rot: -4deg; margin-top: 25px; }
-        .polaroid:nth-child(6) { --rot: 12deg; margin-top: -20px; }
-        .polaroid:nth-child(7) { --rot: -9deg; margin-top: 15px; }
-        .polaroid:nth-child(8) { --rot: 3deg; margin-top: -10px; }
-        .polaroid:nth-child(9) { --rot: -7deg; margin-top: 30px; }
-        .polaroid:nth-child(10) { --rot: 10deg; margin-top: -8px; }
-        .polaroid:nth-child(11) { --rot: -5deg; margin-top: 18px; }
-        .polaroid:nth-child(12) { --rot: 7deg; margin-top: -12px; }
-
-        /* ===== ДОПОЛНИТЕЛЬНЫЙ ТЕКСТ ===== */
-        .footer-text {
-            color: #f0e2ff;
-            font-size: 1.2rem;
-            margin-top: 30px;
-            border-top: 1px dashed rgba(255, 215, 0, 0.3);
-            padding-top: 25px;
-            font-family: 'Georgia', serif;
-            letter-spacing: 1px;
-        }
-        .footer-text .heart-big {
-            font-size: 2rem;
-            display: inline-block;
-            animation: pulse 1.8s infinite;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.3); }
-            100% { transform: scale(1); }
-        }
-
-        /* ===== АДАПТАЦИЯ ПОД ТЕЛЕФОН ===== */
-        @media (max-width: 600px) {
-            h1 { font-size: 2rem; }
-            .polaroid { width: 140px; padding: 10px 10px 30px 10px; }
-            .polaroid .caption { font-size: 0.65rem; }
-            .container { padding: 20px 15px; }
-            .ticket { font-size: 0.9rem; padding: 12px 20px; }
-            .ticket span { font-size: 1.4rem; }
-        }
-
-        /* ===== КОНФЕТТИ-СЕРДЕЧКИ ===== */
-        .confetti-container {
+        /* ===== ЛЕПЕСТКИ ===== */
+        .petals {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 9999;
+            z-index: 0;
             overflow: hidden;
         }
-        .confetti-heart {
+        .petal {
             position: absolute;
-            font-size: 28px;
+            font-size: 22px;
             animation: fall linear forwards;
-            opacity: 0.9;
+            opacity: 0.6;
             user-select: none;
-            text-shadow: 0 0 20px rgba(255, 100, 150, 0.6);
         }
         @keyframes fall {
-            0% {
-                transform: translateY(-10vh) rotate(0deg) scale(0.8);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(110vh) rotate(720deg) scale(0.3);
-                opacity: 0;
-            }
+            0% { transform: translateY(-10vh) rotate(0deg) scale(0.8); opacity: 0.8; }
+            100% { transform: translateY(110vh) rotate(720deg) scale(0.3); opacity: 0; }
+        }
+
+        /* ===== ОСНОВНОЙ КОНТЕЙНЕР ===== */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 700px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(8px);
+            border-radius: 60px 60px 40px 40px;
+            padding: 35px 25px 45px;
+            border: 2px solid rgba(255, 215, 0, 0.15);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+            text-align: center;
+        }
+
+        /* ===== ЗАГОЛОВОК ===== */
+        .date-badge {
+            background: linear-gradient(135deg, #f8bbd0, #f48fb1);
+            padding: 12px 25px;
+            border-radius: 50px;
+            display: inline-block;
+            margin-bottom: 15px;
+            color: #fff;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            font-weight: bold;
+            box-shadow: 0 4px 20px rgba(244, 143, 177, 0.3);
+        }
+        .date-badge span {
+            font-size: 1.6rem;
+            display: block;
+            margin-top: 3px;
+            font-family: 'Georgia', serif;
+        }
+
+        h1 {
+            font-size: 2.6rem;
+            color: #ffe9a7;
+            text-shadow: 0 0 30px #ffb347;
+            margin: 5px 0 5px;
+            font-family: 'Georgia', serif;
+        }
+        .sub {
+            color: #d9c8ff;
+            font-size: 1.2rem;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        /* ===== СЧЁТЧИК ДНЕЙ И ТАЙМЕР ===== */
+        .counter-box {
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 30px;
+            padding: 18px 20px;
+            margin: 10px 0 20px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(4px);
+        }
+        .counter-box .number {
+            font-size: 2.8rem;
+            font-weight: bold;
+            color: #ffe9a7;
+            font-family: 'Georgia', serif;
+            text-shadow: 0 0 20px #ffb347;
+        }
+        .counter-box .label {
+            font-size: 1rem;
+            color: #d9c8ff;
+            margin-top: 2px;
+        }
+
+        /* ===== КАЛЕНДАРЬ ===== */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 15px 0 20px;
+        }
+        .calendar-item {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 24px;
+            padding: 18px 12px;
+            border: 1px solid rgba(255, 215, 0, 0.1);
+            backdrop-filter: blur(4px);
+        }
+        .calendar-item .emoji {
+            font-size: 2rem;
+        }
+        .calendar-item .date {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #ffe9a7;
+            margin-top: 4px;
+        }
+        .calendar-item .desc {
+            font-size: 0.85rem;
+            color: #d9c8ff;
+            margin-top: 2px;
+        }
+
+        /* ===== ПОЛЯРОИД-БИЛЕТ ===== */
+        .polaroid-ticket {
+            background: #fef9e6;
+            padding: 16px 16px 35px 16px;
+            border-radius: 20px 20px 30px 30px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3), 0 0 0 2px #fff9e6, 0 0 0 5px rgba(255, 215, 0, 0.1);
+            width: 240px;
+            margin: 10px auto 20px;
+            transform: rotate(-1deg);
+            transition: 0.3s;
+        }
+        .polaroid-ticket:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+        .polaroid-ticket img {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            object-fit: cover;
+            border-radius: 14px;
+            display: block;
+            border: 2px solid #e6dcc4;
+            filter: brightness(1.02) contrast(1.02);
+        }
+        .polaroid-ticket .caption {
+            font-family: 'Georgia', cursive;
+            font-size: 0.9rem;
+            color: #3d2a1a;
+            margin-top: 12px;
+            text-align: center;
+            letter-spacing: 1px;
+            font-style: italic;
+        }
+
+        /* ===== КНОПКА-КОНВЕРТ ===== */
+        .letter-btn {
+            background: linear-gradient(135deg, #f8bbd0, #f48fb1);
+            border: none;
+            padding: 14px 35px;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+            box-shadow: 0 6px 25px rgba(244, 143, 177, 0.2);
+            font-family: 'Georgia', serif;
+            margin: 8px 0 12px;
+            letter-spacing: 1px;
+        }
+        .letter-btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #f48fb1, #ec407a);
+        }
+
+        .letter-text {
+            display: none;
+            background: rgba(255, 248, 240, 0.95);
+            border-radius: 24px;
+            padding: 25px;
+            margin: 10px 0 15px;
+            border: 2px solid #f8bbd0;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            color: #4a2a3a;
+            line-height: 1.8;
+            text-align: left;
+            box-shadow: 0 8px 30px rgba(244, 143, 177, 0.1);
+        }
+        .letter-text.show {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== МУЗЫКА ===== */
+        .music-box {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 50px;
+            padding: 12px 20px;
+            margin: 8px 0 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 215, 0, 0.15);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .music-box button {
+            background: #f5c542;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 0.95rem;
+            cursor: pointer;
+            color: #1a0f2e;
+            transition: 0.2s;
+            box-shadow: 0 4px 15px rgba(245, 197, 66, 0.2);
+            font-family: inherit;
+        }
+        .music-box button:hover {
+            transform: scale(1.05);
+            background: #ffd966;
+        }
+        .music-box .label {
+            color: #d9c8ff;
+            font-size: 0.85rem;
+        }
+        .music-box .lyrics {
+            color: #ffe9a7;
+            font-size: 0.85rem;
+            font-style: italic;
+            border-left: 1px solid rgba(255, 215, 0, 0.2);
+            padding-left: 12px;
+        }
+
+        .footer {
+            color: #9a7a8a;
+            font-size: 0.95rem;
+            margin-top: 20px;
+            border-top: 1px dashed rgba(255, 215, 0, 0.15);
+            padding-top: 20px;
+        }
+        .footer .heart-big {
+            font-size: 1.8rem;
+            display: inline-block;
+            animation: pulse 1.8s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2rem; }
+            .polaroid-ticket { width: 170px; }
+            .counter-box .number { font-size: 2rem; }
+            .calendar-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== ЗВЁЗДЫ ===== -->
-    <div class="stars" id="stars"></div>
+    <!-- ===== ФОНАРИКИ ===== -->
+    <div class="lanterns" id="lanterns"></div>
 
-    <!-- ===== КОНФЕТТИ-СЕРДЕЧКИ ===== -->
-    <div class="confetti-container" id="confettiContainer"></div>
+    <!-- ===== ЛЕПЕСТКИ ===== -->
+    <div class="petals" id="petals"></div>
 
     <!-- ===== ОСНОВНОЙ БЛОК ===== -->
     <div class="container">
 
-        <!-- БИЛЕТ -->
-        <div class="ticket">
-            🎟️ ВХОДНОЙ БИЛЕТ НА ДВОИХ 🎟️
-            <span>29 ИЮЛЯ 2026</span>
+        <div class="date-badge">
+            💕 НАША ИСТОРИЯ ЛЮБВИ
+            <span>16 ОКТЯБРЯ 2023 — НАВСЕГДА</span>
         </div>
 
-        <h1>🎡 ПАРК АТТРАКЦИОНОВ 🎡</h1>
-        <div class="sub">✦ наша история начинается здесь ✦</div>
+        <h1>💕 Мы — одно целое 💕</h1>
+        <div class="sub">✦ ведь я твой, а ты моя ✦</div>
 
-        <!-- МУЗЫКАЛЬНЫЙ ПЛЕЕР -->
+        <!-- СЧЁТЧИК ДНЕЙ -->
+        <div class="counter-box">
+            <div class="number" id="daysCounter">0</div>
+            <div class="label">дней мы знакомы</div>
+        </div>
+
+        <!-- ТАЙМЕР "СКОЛЬКО МЫ ВМЕСТЕ" -->
+        <div class="counter-box" style="margin-top: -5px;">
+            <div class="number" id="timerCounter">0:0:0:0</div>
+            <div class="label">дней : часов : минут : секунд мы вместе ❤️</div>
+        </div>
+
+        <!-- КАЛЕНДАРЬ -->
+        <div class="calendar-grid">
+            <div class="calendar-item">
+                <div class="emoji">👫</div>
+                <div class="date">8 ИЮНЯ 2025</div>
+                <div class="desc">наша первая встреча (как друзья)</div>
+            </div>
+            <div class="calendar-item">
+                <div class="emoji">💕</div>
+                <div class="date">10 МАЯ 2026</div>
+                <div class="desc">мы поняли, что любим друг друга</div>
+            </div>
+        </div>
+
+        <!-- ПОЛЯРОИД-БИЛЕТ -->
+        <div class="polaroid-ticket">
+            <img src="photo1.jpg" alt="Наша встреча">
+            <div class="caption">🎟️ 16 октября 2023, 23:21 — наш первый разговор</div>
+        </div>
+
+        <!-- КОНВЕРТ -->
+        <button class="letter-btn" id="letterBtn">💌 Наше письмо</button>
+        <div class="letter-text" id="letterText">
+            💕 Здесь будут твои слова, скрины и вся наша история…<br><br>
+            ❤️ Ты — моё всё.
+        </div>
+
+        <!-- МУЗЫКА -->
         <div class="music-box">
             <span class="label">🎵</span>
             <button id="playMusicBtn">🎧 Включить музыку</button>
-            <span class="label">Can't Fight This Feeling</span>
+            <span class="label">Одним целым (One Whole) — Shyney</span>
+            <span class="lyrics">«Мы сумели в самом деле, ведь я твой, а ты моя»</span>
         </div>
 
-        <!-- ГАЛЕРЕЯ ПОЛЯРОИДОВ С ДАРСТВЕННЫМИ НАДПИСЯМИ -->
-        <div class="polaroid-gallery">
-            <!-- ВСТАВЬТЕ СВОИ ФАЙЛЫ (замените IMG_....jpeg на ваши) -->
-            <div class="polaroid"><img src="IMG_5599.jpeg"><div class="caption">💕 Самое счастливое лето</div></div>
-            <div class="polaroid"><img src="IMG_5606.jpeg"><div class="caption">🎠 Ты — моя карусель</div></div>
-            <div class="polaroid"><img src="IMG_5595.jpeg"><div class="caption">🌙 Ночь, где всё началось</div></div>
-            <div class="polaroid"><img src="IMG_5583.jpeg"><div class="caption">🎡 С тобой выше неба</div></div>
-            <div class="polaroid"><img src="IMG_5581.jpeg"><div class="caption">✨ Ты — моя звезда</div></div>
-            <div class="polaroid"><img src="IMG_5584.jpeg"><div class="caption">🍭 Ты слаще ваты</div></div>
-            <div class="polaroid"><img src="IMG_5588.jpeg"><div class="caption">🎢 Мои американские горки</div></div>
-            <div class="polaroid"><img src="IMG_5592.jpeg"><div class="caption">❤️ Только ты и я</div></div>
-            <div class="polaroid"><img src="IMG_5590.jpeg"><div class="caption">📸 Твоя улыбка — мой свет</div></div>
-            <div class="polaroid"><img src="IMG_5594.jpeg"><div class="caption">🎠 Каждый день — аттракцион</div></div>
-            <div class="polaroid"><img src="IMG_5582.jpeg"><div class="caption">🌆 Наш закат любви</div></div>
-            <div class="polaroid"><img src="IMG_5611.jpeg"><div class="caption">💌 Навсегда твоя</div></div>
-        </div>
-
-        <div class="footer-text">
-            <span class="heart-big">❤️</span> 29 июля 2026 — день, когда мы стали ближе <span class="heart-big">❤️</span>
+        <div class="footer">
+            <span class="heart-big">💕</span> наша история — только начало <span class="heart-big">💕</span>
         </div>
 
     </div>
 
-    <!-- ===== СКРИПТЫ ===== -->
     <script>
-        // ======= ЗВЁЗДЫ =======
-        const starsContainer = document.getElementById('stars');
-        for (let i = 0; i < 60; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animationDelay = Math.random() * 3 + 's';
-            star.style.width = star.style.height = (Math.random() * 8 + 3) + 'px';
-            starsContainer.appendChild(star);
+        // ======= ФОНАРИКИ =======
+        const lanternsContainer = document.getElementById('lanterns');
+        const lanternEmojis = ['🏮', '✨', '🌟', '🪔'];
+
+        function createLantern() {
+            const lantern = document.createElement('div');
+            lantern.className = 'lantern';
+            lantern.textContent = lanternEmojis[Math.floor(Math.random() * lanternEmojis.length)];
+            lantern.style.left = Math.random() * 100 + '%';
+            lantern.style.fontSize = (Math.random() * 25 + 22) + 'px';
+            lantern.style.animationDuration = (Math.random() * 8 + 8) + 's';
+            lantern.style.animationDelay = (Math.random() * 3) + 's';
+            lanternsContainer.appendChild(lantern);
+            setTimeout(() => lantern.remove(), 12000);
         }
 
-        // ======= КОНФЕТТИ-СЕРДЕЧКИ =======
-        const confettiContainer = document.getElementById('confettiContainer');
-        const hearts = ['❤️', '💕', '💖', '💗', '💓', '❤️‍🔥', '💝', '✨'];
+        for (let i = 0; i < 12; i++) {
+            setTimeout(createLantern, i * 300);
+        }
+        setInterval(createLantern, 2000);
 
-        function createConfettiHeart() {
-            const heart = document.createElement('div');
-            heart.className = 'confetti-heart';
-            heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
-            heart.style.left = Math.random() * 100 + '%';
-            heart.style.fontSize = (Math.random() * 25 + 18) + 'px';
-            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
-            heart.style.animationDelay = (Math.random() * 1.5) + 's';
-            confettiContainer.appendChild(heart);
-            setTimeout(() => heart.remove(), 6000);
+        // ======= ЛЕПЕСТКИ =======
+        const petalsContainer = document.getElementById('petals');
+        const flowers = ['🌸', '🌺', '🌷', '🌹', '💮', '🌼', '🌸'];
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            petal.textContent = flowers[Math.floor(Math.random() * flowers.length)];
+            petal.style.left = Math.random() * 100 + '%';
+            petal.style.fontSize = (Math.random() * 20 + 16) + 'px';
+            petal.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            petal.style.animationDelay = (Math.random() * 2) + 's';
+            petalsContainer.appendChild(petal);
+            setTimeout(() => petal.remove(), 7000);
         }
 
-        // сначала высыпается 30 сердечек
-        for (let i = 0; i < 30; i++) {
-            setTimeout(createConfettiHeart, i * 120);
+        for (let i = 0; i < 15; i++) {
+            setTimeout(createPetal, i * 150);
         }
+        setInterval(createPetal, 1500);
 
-        // потом каждые 1.5 секунды новое сердечко
-        setInterval(createConfettiHeart, 1500);
+        // ======= СЧЁТЧИК ДНЕЙ =======
+        function updateDays() {
+            const startDate = new Date('2023-10-16T23:21:00+03:00');
+            const now = new Date();
+            const diff = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+            document.getElementById('daysCounter').textContent = diff >= 0 ? diff : 0;
+        }
+        updateDays();
+        setInterval(updateDays, 86400000);
 
-        // ======= МУЗЫКАЛЬНЫЙ ПЛЕЕР =======
+        // ======= ТАЙМЕР "МЫ ВМЕСТЕ" =======
+        function updateTimer() {
+            const startDate = new Date('2026-05-10T00:00:00+03:00');
+            const now = new Date();
+            let diff = Math.floor((now - startDate) / 1000);
+            if (diff < 0) diff = 0;
+
+            const days = Math.floor(diff / 86400);
+            diff -= days * 86400;
+            const hours = Math.floor(diff / 3600);
+            diff -= hours * 3600;
+            const minutes = Math.floor(diff / 60);
+            const seconds = diff % 60;
+
+            document.getElementById('timerCounter').textContent =
+                days + ':' + String(hours).padStart(2, '0') + ':' +
+                String(minutes).padStart(2, '0') + ':' +
+                String(seconds).padStart(2, '0');
+        }
+        updateTimer();
+        setInterval(updateTimer, 1000);
+
+        // ======= КОНВЕРТ =======
+        const letterBtn = document.getElementById('letterBtn');
+        const letterText = document.getElementById('letterText');
+
+        letterBtn.addEventListener('click', function() {
+            letterText.classList.toggle('show');
+            letterBtn.textContent = letterText.classList.contains('show') ?
+                '💌 Закрыть письмо' :
+                '💌 Наше письмо';
+        });
+
+        // ======= МУЗЫКА =======
         const playBtn = document.getElementById('playMusicBtn');
         let audio = null;
         let isPlaying = false;
 
         playBtn.addEventListener('click', function() {
             if (!audio) {
-                audio = new Audio();
-                // ★ ЗАМЕНИТЕ НА ВАШ MP3 ★
-                audio.src = 'music.mp3'; 
+                audio = new Audio('music.mp3');
                 audio.loop = true;
-                audio.volume = 0.6;
+                audio.volume = 0.5;
             }
 
             if (isPlaying) {
@@ -366,11 +491,14 @@
                 isPlaying = false;
                 playBtn.textContent = '🎧 Включить музыку';
             } else {
-                audio.play().catch(() => {
-                    alert('⚠️ Залейте music.mp3 в репозиторий!');
-                });
-                isPlaying = true;
-                playBtn.textContent = '⏸️ Пауза';
+                audio.play()
+                    .then(() => {
+                        isPlaying = true;
+                        playBtn.textContent = '⏸️ Пауза';
+                    })
+                    .catch(() => {
+                        alert('⚠️ Загрузи music.mp3 в репозиторий!');
+                    });
             }
         });
     </script>
