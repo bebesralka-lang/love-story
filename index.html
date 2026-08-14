@@ -760,4 +760,282 @@
 
             </div>
         </div>
-   
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ===== СКРИПТЫ ===== -->
+    <!-- ============================================================ -->
+    <script>
+        // ======= 0. СТИКЕРЫ (фон) =======
+        const floatersUp = document.getElementById('floatersUp');
+        const stickers = ['🤍', '⚪', '◻️', '▫️', '⬜'];
+
+        function createFloaterUp() {
+            const el = document.createElement('div');
+            el.className = 'floater-up';
+            el.textContent = stickers[Math.floor(Math.random() * stickers.length)];
+            el.style.left = Math.random() * 100 + '%';
+            el.style.fontSize = (Math.random() * 20 + 18) + 'px';
+            el.style.animationDuration = (Math.random() * 10 + 8) + 's';
+            el.style.animationDelay = (Math.random() * 2) + 's';
+            floatersUp.appendChild(el);
+            setTimeout(() => el.remove(), 12000);
+        }
+        for (let i = 0; i < 30; i++) {
+            setTimeout(createFloaterUp, i * 150);
+        }
+        setInterval(createFloaterUp, 800);
+
+        const floatersDown = document.getElementById('floatersDown');
+        function createFloaterDown() {
+            const el = document.createElement('div');
+            el.className = 'floater-down';
+            el.textContent = stickers[Math.floor(Math.random() * stickers.length)];
+            el.style.left = Math.random() * 100 + '%';
+            el.style.fontSize = (Math.random() * 18 + 14) + 'px';
+            el.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            el.style.animationDelay = (Math.random() * 2) + 's';
+            floatersDown.appendChild(el);
+            setTimeout(() => el.remove(), 7000);
+        }
+        for (let i = 0; i < 25; i++) {
+            setTimeout(createFloaterDown, i * 150);
+        }
+        setInterval(createFloaterDown, 1200);
+
+        // ======= 1. ЭКРАН ВХОДА (ИГРА) =======
+        const entryYes = document.getElementById('entryYes');
+        const entryNo = document.getElementById('entryNo');
+        const entryMessage = document.getElementById('entryMessage');
+        const entryScreen = document.getElementById('entryScreen');
+        const mainSite = document.getElementById('mainSite');
+
+        let entryAttempts = 0;
+        let gameWon = false;
+
+        entryYes.addEventListener('mouseenter', function() {
+            if (gameWon) return;
+            const container = document.getElementById('entryGame');
+            const rect = container.getBoundingClientRect();
+            const btnW = this.offsetWidth;
+            const btnH = this.offsetHeight;
+            const maxX = rect.width - btnW - 20;
+            const maxY = rect.height - btnH - 20;
+            if (maxX < 0 || maxY < 0) return;
+            this.style.position = 'absolute';
+            this.style.left = Math.random() * maxX + 'px';
+            this.style.top = Math.random() * maxY + 'px';
+            entryAttempts++;
+
+            const noTexts = ['😤 Нет', '😡 Ну нет!', '😤 Не сдамся!', '🤨 А вот и нет!', '😠 Нет!!!', '😤 Не дождёшься!', '😡 Неееет!', '🤔 Может быть...'];
+            if (entryAttempts < noTexts.length) {
+                entryNo.textContent = noTexts[entryAttempts];
+            }
+
+            if (entryAttempts >= 8) {
+                // ПОБЕДА!
+                gameWon = true;
+                this.style.position = 'relative';
+                this.style.left = 'auto';
+                this.style.top = 'auto';
+                this.textContent = '💕 Ну ладно, ДА!';
+                this.style.background = 'linear-gradient(135deg, #f8bbd0, #ec407a)';
+                this.style.transform = 'scale(1.2)';
+                entryMessage.textContent = '💕 Я ТЕБЯ ТОЖЕ ЛЮБЛЮ!!! 💕';
+                entryMessage.classList.add('show');
+                entryNo.style.opacity = '0.3';
+                entryNo.style.cursor = 'default';
+                // Открываем сайт через 1.5 сек
+                setTimeout(() => {
+                    entryScreen.classList.add('hidden');
+                    mainSite.classList.add('show');
+                    // запускаем печатную машинку
+                    startTypewriter();
+                }, 1500);
+            }
+        });
+
+        entryNo.addEventListener('click', function() {
+            if (gameWon) return;
+            entryMessage.textContent = '😢 Ну почему... Я же знаю, что любишь!';
+            entryMessage.classList.add('show');
+            setTimeout(() => entryMessage.classList.remove('show'), 2500);
+        });
+
+        entryYes.addEventListener('click', function() {
+            if (gameWon) return;
+            gameWon = true;
+            entryMessage.textContent = '💕 Я ТЕБЯ ТОЖЕ ЛЮБЛЮ!!! 💕';
+            entryMessage.classList.add('show');
+            this.style.transform = 'scale(1.2)';
+            entryNo.style.opacity = '0.3';
+            entryNo.style.cursor = 'default';
+            setTimeout(() => {
+                entryScreen.classList.add('hidden');
+                mainSite.classList.add('show');
+                startTypewriter();
+            }, 1500);
+        });
+
+        // ======= 2. ПЕЧАТНАЯ МАШИНКА =======
+        let typewriterInterval = null;
+        const typewriterElement = document.getElementById('typewriter');
+        const typewriterTexts = [
+            '✨ Мы — одно целое',
+            '💕 Ты — моя вселенная',
+            '🤍 Я твой, а ты моя',
+            '🌟 Наша любовь — бесконечность'
+        ];
+        let twIndex = 0;
+
+        function startTypewriter() {
+            if (typewriterInterval) return;
+            let charIndex = 0;
+            const currentText = typewriterTexts[twIndex % typewriterTexts.length];
+            typewriterElement.textContent = '';
+            typewriterInterval = setInterval(() => {
+                if (charIndex < currentText.length) {
+                    typewriterElement.textContent += currentText[charIndex];
+                    charIndex++;
+                } else {
+                    clearInterval(typewriterInterval);
+                    typewriterInterval = null;
+                    // через 4 сек переключить на следующую фразу
+                    setTimeout(() => {
+                        twIndex++;
+                        if (typewriterInterval === null) {
+                            startTypewriter();
+                        }
+                    }, 4000);
+                }
+            }, 80);
+        }
+
+        // ======= 3. СЧЁТЧИК ПОЦЕЛУЕВ =======
+        let kissCount = 0;
+        document.getElementById('kissBtn').addEventListener('click', function() {
+            kissCount++;
+            document.getElementById('kissCount').textContent = kissCount;
+            // анимация
+            this.style.transform = 'scale(0.9)';
+            setTimeout(() => this.style.transform = 'scale(1.05)', 100);
+        });
+
+        // ======= 4. КАРУСЕЛЬ =======
+        let currentSlide = 0;
+        const slides = document.querySelector('.carousel-slides');
+        const totalSlides = slides.children.length;
+        document.getElementById('carouselPrev').addEventListener('click', function() {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            slides.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+        });
+        document.getElementById('carouselNext').addEventListener('click', function() {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            slides.style.transform = 'translateX(-' + (currentSlide * 100) + '%)';
+        });
+
+        // ======= 5. ЦИТАТА ДНЯ =======
+        const quotes = [
+            '«Любовь — это когда два человека смотрят в одном направлении»',
+            '«Ты — моё утро, мой день и моя ночь»',
+            '«С тобой я чувствую себя дома»',
+            '«Любовь не требует слов, она чувствуется сердцем»',
+            '«Ты — лучшее, что со мной случилось»',
+            '«Наша любовь — это сказка, в которой мы главные герои»'
+        ];
+        document.getElementById('quoteText').textContent = quotes[Math.floor(Math.random() * quotes.length)];
+
+        // ======= 6. ПЛЕЙЛИСТ =======
+        let currentAudio = null;
+        document.querySelectorAll('.play-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const song = this.dataset.song;
+                if (currentAudio) {
+                    currentAudio.pause();
+                    currentAudio = null;
+                    document.querySelectorAll('.play-btn').forEach(b => b.textContent = '▶️');
+                }
+                if (song) {
+                    currentAudio = new Audio(song);
+                    currentAudio.volume = 0.5;
+                    currentAudio.play().catch(() => {
+                        alert('⚠️ Файл ' + song + ' не найден. Загрузи его в репозиторий!');
+                    });
+                    this.textContent = '⏸️';
+                }
+            });
+        });
+
+        document.getElementById('playAllBtn').addEventListener('click', function() {
+            const songs = ['Shyney.mp3', 'song2.mp3', 'song3.mp3'];
+            let index = 0;
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+                document.querySelectorAll('.play-btn').forEach(b => b.textContent = '▶️');
+            }
+            function playNext() {
+                if (index >= songs.length) { index = 0; }
+                const audio = new Audio(songs[index]);
+                audio.volume = 0.5;
+                audio.play().catch(() => {
+                    alert('⚠️ Файл ' + songs[index] + ' не найден');
+                });
+                audio.onended = function() {
+                    index++;
+                    playNext();
+                };
+                currentAudio = audio;
+                document.querySelectorAll('.play-btn').forEach((b, i) => {
+                    b.textContent = i === index ? '⏸️' : '▶️';
+                });
+            }
+            playNext();
+        });
+
+        // ======= 7. БАНОЧКА ВОСПОМИНАНИЙ =======
+        const memories = [
+            '✨ Тот день, когда мы впервые увиделись — 16 октября 2023',
+            '💕 Наша первая прогулка под звёздами',
+            '🌸 Ты подарил мне цветы, и я поняла, что влюблена',
+            '🎡 Наш день в парке аттракционов — 29 июля 2026',
+            '🌙 Тот вечер, когда мы говорили до утра',
+            '💋 Наш первый поцелуй — 14 июня 2026',
+            '☀️ Твоя улыбка, которая согревает меня каждый день'
+        ];
+        document.getElementById('memoryBtn').addEventListener('click', function() {
+            const text = memories[Math.floor(Math.random() * memories.length)];
+            document.getElementById('memoryText').textContent = text;
+        });
+
+        // ======= 8. СТИКЕР-ДОЖДЬ =======
+        const rainArea = document.getElementById('rainArea');
+        const rainStickers = ['🤍', '⚪', '◻️', '▫️', '⬜'];
+
+        rainArea.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            for (let i = 0; i < 12; i++) {
+                const el = document.createElement('div');
+                el.textContent = rainStickers[Math.floor(Math.random() * rainStickers.length)];
+                el.style.position = 'absolute';
+                el.style.left = (x + (Math.random() - 0.5) * 120) + 'px';
+                el.style.top = (y + (Math.random() - 0.5) * 80) + 'px';
+                el.style.fontSize = (Math.random() * 28 + 18) + 'px';
+                el.style.pointerEvents = 'none';
+                el.style.animation = 'fallRotate ' + (Math.random() * 2 + 1.5) + 's linear forwards';
+                el.style.zIndex = '10';
+                el.style.opacity = '0.8';
+                rainArea.appendChild(el);
+                setTimeout(() => el.remove(), 4000);
+            }
+        });
+
+        // ======= 9. СЧЁТЧИК ДНЕЙ (на всякий случай) =======
+        // можно добавить, но мы его не выводили в этом коде
+
+        console.log('💕 Сайт любви готов!');
+    </script>
+</body>
+</html>
